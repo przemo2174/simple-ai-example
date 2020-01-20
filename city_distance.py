@@ -56,12 +56,14 @@ class DistanceProblem(SearchProblem):
         cost = [c.cost for c in self.graph.connections if c.src == src and c.dest == dest][0]
         return cost
 
-    # def heuristic(self, state):
-    #     # how far are we from the goal?
-    #     wrong = sum([1 if state[i] != self.goal[i] else 0
-    #                 for i in range(len(state))])
-    #     missing = len(self.goal) - len(state)
-    #     return wrong + missing
+    def heuristic(self, state):
+        #print(state)
+        # how far are we from the goal?
+        # wrong = sum([1 if state[i] != self.goal[i] else 0
+        #             for i in range(len(state))])
+        # missing = len(self.goal) - len(state)
+        # return wrong + missing
+        return 1
 
 
 # Znajdz najkrotsza drogę z Krakowa do Szczecina
@@ -70,7 +72,7 @@ initial_state = 'Kraków'
 goal = 'Szczecin'
 
 problem = DistanceProblem(initial_state, goal, g)
-result = breadth_first(problem)
+result = astar(problem, graph_search=True)
 
 print('Final state:', result.state)
 print('Path:', result.path())
